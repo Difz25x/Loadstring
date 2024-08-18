@@ -38,11 +38,11 @@ local function createSkillButton(name, key, position)
 end
 
 -- Create skill buttons
-createSkillButton("SkillZ", "Z", UDim2.new(0, 0, 0, 0))
-createSkillButton("SkillX", "X", UDim2.new(0, 50, 0, 0))
-createSkillButton("SkillC", "C", UDim2.new(0, 100, 0, 0))
-createSkillButton("SkillV", "V", UDim2.new(0, 150, 0, 0))
-createSkillButton("SkillF", "F", UDim2.new(0, 0, 0, 50))
+createSkillButton("SkillZ", "z", UDim2.new(0, 0, 0, 0))
+createSkillButton("SkillX", "x", UDim2.new(0, 50, 0, 0))
+createSkillButton("SkillC", "c", UDim2.new(0, 100, 0, 0))
+createSkillButton("SkillV", "v", UDim2.new(0, 150, 0, 0))
+createSkillButton("SkillF", "f", UDim2.new(0, 0, 0, 50))
 
 -- Function to use a skill
 local function useSkill(key)
