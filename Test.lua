@@ -4,7 +4,7 @@ local playerGui = player:WaitForChild("PlayerGui")
 
 -- Create the ScreenGui
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "HeliusHubBeta"
+ScreenGui.Name = "HeliusHub ( Beta )"
 ScreenGui.Parent = playerGui
 ScreenGui.Enabled = true  -- Ensure the GUI is enabled
 
@@ -18,8 +18,8 @@ Frame.Size = UDim2.new(0, 300, 0, 200)
 -- Title Label
 local TitleLabel = Instance.new("TextLabel")
 TitleLabel.Parent = Frame
-TitleLabel.Size = UDim2.new(1, 0, 0, 50)
-TitleLabel.Text = "helius Hub [ Beta ]"
+TitleLabel.Size = UDim2.new(1, 0, 0, 10)
+TitleLabel.Text = "Helius Hub [ Beta ]"
 TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 TitleLabel.TextScaled = true
 TitleLabel.Font = Enum.Font.GothamBold
@@ -28,7 +28,7 @@ TitleLabel.BackgroundTransparency = 1  -- No background for text labels
 -- Description Label
 local DescriptionLabel = Instance.new("TextLabel")
 DescriptionLabel.Parent = Frame
-DescriptionLabel.Size = UDim2.new(1, 0, 0, 30)
+DescriptionLabel.Size = UDim2.new(1, 0, 0, 6)
 DescriptionLabel.Position = UDim2.new(0, 0, 0, 50)
 DescriptionLabel.Text = "Adjust your walk speed below:"
 DescriptionLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
@@ -39,7 +39,7 @@ DescriptionLabel.BackgroundTransparency = 1  -- No background for text labels
 -- Speed Label
 local SpeedLabel = Instance.new("TextLabel")
 SpeedLabel.Parent = Frame
-SpeedLabel.Size = UDim2.new(1, 0, 0, 30)
+SpeedLabel.Size = UDim2.new(1, 0, 0, 25)
 SpeedLabel.Position = UDim2.new(0, 0, 0, 80)
 SpeedLabel.Text = "Walk Speed: 16"
 SpeedLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -50,7 +50,7 @@ SpeedLabel.BackgroundTransparency = 1  -- No background for text labels
 -- Speed Input (TextBox)
 local SpeedInput = Instance.new("TextBox")
 SpeedInput.Parent = Frame
-SpeedInput.Size = UDim2.new(1, 0, 0, 30)
+SpeedInput.Size = UDim2.new(1, 0, 0, 15)
 SpeedInput.Position = UDim2.new(0, 0, 0, 110)
 SpeedInput.Text = "16"
 SpeedInput.TextColor3 = Color3.fromRGB(255, 255, 255)
