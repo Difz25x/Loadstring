@@ -26,7 +26,6 @@ SpeedSlider.Size = UDim2.new(1, -20, 0, 30)
 SpeedSlider.Position = UDim2.new(0, 10, 0, 50)
 SpeedSlider.MinValue = 16
 SpeedSlider.MaxValue = 100
-SpeedSlider.Value = 16
 
 ModifySpeedButton.Parent = Frame
 ModifySpeedButton.Size = UDim2.new(1, 0, 0, 50)
@@ -37,7 +36,7 @@ local speedModified = true
 
 ModifySpeedButton.MouseButton1Click:Connect(function()
     if speedModified then
-        local newSpeed = SpeedSlider.Value
+        local newSpeed = SpeedSlider:Callback(function(Value)
         player.Character.Humanoid.WalkSpeed = newSpeed
         SpeedLabel.Text = "Walk Speed: " .. newSpeed
     end
