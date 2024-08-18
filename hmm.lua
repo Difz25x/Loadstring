@@ -1,6 +1,6 @@
 local player = game.Players.LocalPlayer
+local PressMouseKey = player:GetMouse()
 local playerGui = player:WaitForChild("PlayerGui")
-local Mouse = p
 
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "SkillUI"
@@ -21,34 +21,30 @@ textLabel.Parent = frame
 local UserInputService = game:GetService("UserInputService")
 
 local function useSkill(key)
-          PressKey(key)
-          ReleaseKey(key)
-        end
+    PressKey(key)
+    ReleaseKey(key)
+end
 
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
     if gameProcessed then return end
     if input.KeyCode == Enum.KeyCode.Z then
-        
+        useSkill("Z")
     elseif input.KeyCode == Enum.KeyCode.X then
-        -- Execute skill X
+        useSkill("X")
     elseif input.KeyCode == Enum.KeyCode.C then
-        -- Execute skill C
+        useSkill("C")
     elseif input.KeyCode == Enum.KeyCode.V then
-        -- Execute skill V
+        useSkill("V")
     elseif input.KeyCode == Enum.KeyCode.F then
-        -- Execute skill F
+        useSkill("F")
     end
 end)
 
 local function startAutoClicker(interval)
-
-        interval = (interval or 1) * 10
-  
-        while true do
-    
-        useSkill()
-    
-        Sleep(interval)
+    interval = (interval or 1) * 1000
+    while true do
+        useSkill("Z")
+        task.wait(interval / 1000)
     end
 end
 
@@ -56,20 +52,19 @@ startAutoClicker(1)
 
 local function detectTerrorSharkActions()
     while true do
-if TerrorShark.IsAttacking then
-     fireRemoteEvent("UseSkill", "Z")
- end
-        wait(0.1)
+        if TerrorShark.IsAttacking then
+            fireRemoteEvent("UseSkill", "Z")
+        end
+        task.wait(0.1)
     end
 end
-
 
 detectTerrorSharkActions()
 
 local function dodgeSkills()
-if TerrorShark.IsUsingSkillA then
-     player.Character:MoveTo(upPosition)
-elseif TerrorShark.IsUsingSkillB then
-     player.Character:MoveTo(downPosition)
-  end
+    if TerrorShark.IsUsingSkillA then
+        player.Character:MoveTo(upPosition)
+    elseif TerrorShark.IsUsingSkillB then
+        player.Character:MoveTo(downPosition)
+    end
 end
