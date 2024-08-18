@@ -13,7 +13,7 @@ local Frame = Instance.new("Frame")
 Frame.Parent = ScreenGui
 Frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 Frame.Position = UDim2.new(0.5, -150, 0.5, -100)
-Frame.Size = UDim2.new(0, 600, 0, 400)
+Frame.Size = UDim2.new(0, 300, 0, 200)
 
 -- Title Label
 local TitleLabel = Instance.new("TextLabel")
