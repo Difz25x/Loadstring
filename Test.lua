@@ -13,12 +13,12 @@ local Frame = Instance.new("Frame")
 Frame.Parent = ScreenGui
 Frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 Frame.Position = UDim2.new(0.5, -150, 0.5, -100)
-Frame.Size = UDim2.new(0, 300, 0, 200)
+Frame.Size = UDim2.new(0, 600, 0, 400)
 
 -- Title Label
 local TitleLabel = Instance.new("TextLabel")
 TitleLabel.Parent = Frame
-TitleLabel.Size = UDim2.new(1, 0, 0, 10)
+TitleLabel.Size = UDim2.new(1, 0, 0, 20)
 TitleLabel.Text = "Helius Hub [ Beta ]"
 TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 TitleLabel.TextScaled = true
@@ -28,7 +28,7 @@ TitleLabel.BackgroundTransparency = 1  -- No background for text labels
 -- Description Label
 local DescriptionLabel = Instance.new("TextLabel")
 DescriptionLabel.Parent = Frame
-DescriptionLabel.Size = UDim2.new(1, 0, 0, 6)
+DescriptionLabel.Size = UDim2.new(1, 0, 0, 10)
 DescriptionLabel.Position = UDim2.new(0, 0, 0, 50)
 DescriptionLabel.Text = "Adjust your walk speed below:"
 DescriptionLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
@@ -71,7 +71,7 @@ ModifySpeedButton.TextScaled = true
 
 -- Function to modify speed
 local function modifySpeed()
-    local newSpeed = tonumber(SpeedInput.Text) or 16
+    local newSpeed = SpeedInput.Text or 16
     if player.Character and player.Character:FindFirstChild("Humanoid") then
         player.Character.Humanoid.WalkSpeed = newSpeed
         SpeedLabel.Text = "Walk Speed: " .. newSpeed
