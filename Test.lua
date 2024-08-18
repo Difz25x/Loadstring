@@ -25,10 +25,20 @@ TitleLabel.TextScaled = true
 TitleLabel.Font = Enum.Font.GothamBold
 TitleLabel.BackgroundTransparency = 1  -- No background for text labels
 
+local CloseLabel = Instance.new("TextLabel")
+CloseLabel.Parent = Frame
+CloseLabel.Size = UDim2.new(1, 0, 0, 50)
+CloseLabel.Position = UDim2.new(0, 0, 0, 50)
+CloseLabel.Text = "X"
+CloseLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+CloseLabel.TextScaled = true
+CloseLabel.Font = Enum.Font.Gotham
+CloseLabel.BackgroundTransparency = 1  -- No background for text labels
+
 -- Description Label
 local DescriptionLabel = Instance.new("TextLabel")
 DescriptionLabel.Parent = Frame
-DescriptionLabel.Size = UDim2.new(1, 0, 0, 10)
+DescriptionLabel.Size = UDim2.new(1, 0, 0, 50)
 DescriptionLabel.Position = UDim2.new(0, 0, 0, 50)
 DescriptionLabel.Text = "Adjust your walk speed below:"
 DescriptionLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
@@ -72,12 +82,10 @@ ModifySpeedButton.TextScaled = true
 -- Function to modify speed
 local function modifySpeed()
     local newSpeed = SpeedInput.Text or 16
+        -- Connect events
+        ModifySpeedButton.MouseButton1Click:Connect(function)
     if player.Character and player.Character:FindFirstChild("Humanoid") then
         player.Character.Humanoid.WalkSpeed = newSpeed
         SpeedLabel.Text = "Walk Speed: " .. newSpeed
     end
 end
-
--- Connect events
-ModifySpeedButton.MouseButton1Click:Connect(modifySpeed)
-SpeedInput.FocusLost:Connect(modifySpeed)
