@@ -11,27 +11,27 @@ frame.Position = UDim2.new(0.5, -100, 0.1, 0)
 frame.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
 frame.Parent = screenGui
 
-local textLabel = Instance.new("TextLabel")
+local textLabel = Instance.new("Info")
 textLabel.Size = UDim2.new(1, 0, 0.3, 0)
 textLabel.Text = "Skills: Z, X, C, V, F"
 textLabel.TextColor3 = Color3.new(1, 1, 1)
 textLabel.Parent = frame
 
-local statusLabel = Instance.new("TextLabel")
+local statusLabel = Instance.new("Status")
 statusLabel.Size = UDim2.new(1, 0, 0.3, 0)
 statusLabel.Position = UDim2.new(0, 0, 0.3, 0)
 statusLabel.Text = "Auto-Clicker: Off"
 statusLabel.TextColor3 = Color3.new(1, 1, 1)
 statusLabel.Parent = frame
 
-local startButton = Instance.new("TextButton")
+local startButton = Instance.new("Config")
 startButton.Size = UDim2.new(1, 0, 0.2, 0)
 startButton.Position = UDim2.new(0, 0, 0.6, 0)
 startButton.Text = "Start Auto-Clicker"
 startButton.BackgroundColor3 = Color3.new(0.2, 0.8, 0.2)
 startButton.Parent = frame
 
-local stopButton = Instance.new("TextButton")
+local stopButton = Instance.new("Config")
 stopButton.Size = UDim2.new(1, 0, 0.2, 0)
 stopButton.Position = UDim2.new(0, 0, 0.8, 0)
 stopButton.Text = "Stop Auto-Clicker"
