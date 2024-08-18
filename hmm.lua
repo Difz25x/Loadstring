@@ -16,6 +16,7 @@ frame.Parent = screenGui
 -- Function to create a skill button
 local function createSkillButton(name, key, position)
     local button = Instance.new("TextButton")  -- Corrected instance type
+    useSkill(key)
     button.Size = UDim2.new(0, 40, 0, 40)
     button.Position = position
     button.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
