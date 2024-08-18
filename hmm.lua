@@ -1,5 +1,4 @@
 local player = game.Players.LocalPlayer
-local PressMouseKey = player:GetMouse()
 local playerGui = player:WaitForChild("PlayerGui")
 
 local screenGui = Instance.new("ScreenGui")
@@ -21,50 +20,84 @@ textLabel.Parent = frame
 local UserInputService = game:GetService("UserInputService")
 
 local function useSkill(key)
-    PressKey(key)
-    ReleaseKey(key)
+    -- Simulate key press. This is a placeholder. You need to implement the actual key press logic.
+    print("Using skill: " .. tostring(key))
 end
 
-UserInputService.InputBegan:Connect(function(input, gameProcessed)
-    if gameProcessed then return end
-    if input.KeyCode == Enum.KeyCode.Z then
-        useSkill("Z")
-    elseif input.KeyCode == Enum.KeyCode.X then
-        useSkill("X")
-    elseif input.KeyCode == Enum.KeyCode.C then
-        useSkill("C")
-    elseif input.KeyCode == Enum.KeyCode.V then
-        useSkill("V")
-    elseif input.KeyCode == Enum.KeyCode.F then
-        useSkill("F")
-    end
-end)
-
 local function startAutoClicker(interval)
+    local keys = {
+        Enum.KeyCode.Z,
+        Enum.KeyCode.X,
+        Enum.KeyCode.C,
+        Enum.KeyCode.V,
+        Enum.KeyCode.F
+    }
     interval = (interval or 1) * 1000
     while true do
-        useSkill("Z")
+        local randomKey = keys[math.random(#keys)]
+        useSkill(randomKey)
         task.wait(interval / 1000)
     end
 end
 
+-- Start the auto-clicker with a 1-second interval
 startAutoClicker(1)
 
+-- Placeholder for TerrorShark actions detection
 local function detectTerrorSharkActions()
     while true do
-        if TerrorShark.IsAttacking then
-            fireRemoteEvent("UseSkill", "Z")
-        end
+        -- Replace with actual condition checking TerrorShark's state
+        print("Dodge TerrorShark Skill")
         task.wait(0.1)
     end
 end
 
+-- Start detecting TerrorShark actions
 detectTerrorSharkActions()
 
+-- Placeholder for dodging skills
+
+-- Assuming TerrorShark is an object or a module that exposes its state
+local TerrorShark = game.ReplicatedStorage:WaitForChild("TerrorShark")
+
+-- Define positions for dodging relative to the player's current position
+local function getDodgePosition(playerCharacter, offsetY)
+    return playerCharacter:GetPrimaryPartCFrame() * CFrame.new(0, offsetY, 0)
+end
+
+-- Function to dodge skills based on Terror Shark's actions
 local function dodgeSkills()
-    if TerrorShark.IsUsingSkillA then
-        player.Character:MoveTo(upPosition)
-    elseif TerrorShark.IsUsingSkillB then
-        player.Character:MoveTo(downPosition)
+    if player and player.Character then
+        local upPosition = getDodgePosition(player.Character, 194)  -- Position above the player
+        local downPosition = getDodgePosition(player.Character, -194)  -- Position below the player
+
+        if TerrorShark.IsUsingSkillA then
+            -- Move player's character to an 'upPosition' to dodge SkillA
+            player.Character:SetPrimaryPartCFrame(upPosition)
+        elseif TerrorShark.IsUsingSkillB then
+            -- Move player's character to a 'downPosition' to dodge SkillB
+            player.Character:SetPrimaryPartCFrame(downPosition)
+        end
     end
+end
+
+-- Continuously monitor Terror Shark's actions and dodge accordingly
+local function monitorTerrorSharkActions()
+    while true do
+        if player and player.Character then
+            dodgeSkills()
+        end
+        wait(0.1)  -- Adjust the wait time based on how frequently you want to check
+    end
+end
+
+-- Ensure the player's character is loaded
+player.CharacterAdded:Connect(function(character)
+    player.Character = character
+    monitorTerrorSharkActions()
+end)
+
+-- If the character is already loaded, start monitoring immediately
+if player.Character then
+    monitorTerrorSharkActions()
 end
