@@ -47,7 +47,6 @@ createSkillButton("SkillF", "F", UDim2.new(0, 0, 0, 50))
 -- Function to use a skill
 local function useSkill(key)
     print("Using skill: " .. tostring(key))
-    button.MouseButton1Click:Connect(function()
-            key
+    button.MouseButton1Click:Connect(function(key)
         end
 end
