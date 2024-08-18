@@ -4,7 +4,7 @@ local playerGui = player:WaitForChild("PlayerGui")
 
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
-local SpeedSlider = Instance.new("UISlider") -- Assuming UISlider is the correct type for a slider
+local SpeedSlider = Instance.new("UISlider")
 local SpeedLabel = Instance.new("TextLabel")
 local ModifySpeedButton = Instance.new("TextButton")
 
@@ -43,7 +43,6 @@ end
 
 ModifySpeedButton.MouseButton1Click:Connect(modifySpeed)
 
--- Optionally, connect the slider's value changed event to update the speed dynamically
 SpeedSlider.ValueChanged:Connect(function()
     modifySpeed()
 end)
