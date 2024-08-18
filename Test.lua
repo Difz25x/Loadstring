@@ -47,14 +47,16 @@ SpeedLabel.TextScaled = true
 SpeedLabel.Font = Enum.Font.Gotham
 SpeedLabel.BackgroundTransparency = 1  -- No background for text labels
 
--- Speed Slider
-local SpeedSlider = Instance.new("UISlider")
-SpeedSlider.Parent = Frame
-SpeedSlider.Size = UDim2.new(1, 0, 0, 30)
-SpeedSlider.Position = UDim2.new(0, 0, 0, 110)
-SpeedSlider.MinValue = 16
-SpeedSlider.MaxValue = 100
-SpeedSlider.Value = 16
+-- Speed Input (TextBox)
+local SpeedInput = Instance.new("TextBox")
+SpeedInput.Parent = Frame
+SpeedInput.Size = UDim2.new(1, 0, 0, 30)
+SpeedInput.Position = UDim2.new(0, 0, 0, 110)
+SpeedInput.Text = "16"
+SpeedInput.TextColor3 = Color3.fromRGB(255, 255, 255)
+SpeedInput.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+SpeedInput.Font = Enum.Font.Gotham
+SpeedInput.TextScaled = true
 
 -- Modify Speed Button
 local ModifySpeedButton = Instance.new("TextButton")
@@ -69,7 +71,7 @@ ModifySpeedButton.TextScaled = true
 
 -- Function to modify speed
 local function modifySpeed()
-    local newSpeed = SpeedSlider.Value
+    local newSpeed = tonumber(SpeedInput.Text) or 16
     if player.Character and player.Character:FindFirstChild("Humanoid") then
         player.Character.Humanoid.WalkSpeed = newSpeed
         SpeedLabel.Text = "Walk Speed: " .. newSpeed
@@ -78,6 +80,4 @@ end
 
 -- Connect events
 ModifySpeedButton.MouseButton1Click:Connect(modifySpeed)
-SpeedSlider.ValueChanged:Connect(function()
-    modifySpeed()
-end)
+SpeedInput.FocusLost:Connect(modifySpeed)
