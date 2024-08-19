@@ -1,100 +1,71 @@
-local Players = game:GetService("Players")
-local player = Players.LocalPlayer
-local playerGui = player:WaitForChild("PlayerGui")
+local player = game.Players.LocalPlayer
+local playerSpeed = player.Character:WaitForChild("Humanoid").WalkSpeed
 
--- Create the ScreenGui
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "HeliusHub ( Beta )"
-ScreenGui.Parent = playerGui
-ScreenGui.Enabled = true  -- Ensure the GUI is enabled
-
--- Create the main Frame
 local Frame = Instance.new("Frame")
+local TextBox = Instance.new("TextBox")
+local Slider = Instance.new("Frame")
+local SliderButton = Instance.new("Frame")
+local ValueLabel = Instance.new("TextLabel")
+
+-- Properties
+ScreenGui.Parent = player.PlayerGui
+
 Frame.Parent = ScreenGui
-Frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-Frame.Position = UDim2.new(0.5, -150, 0.5, -100)
 Frame.Size = UDim2.new(0, 300, 0, 200)
+Frame.Position = UDim2.new(0.5, -150, 0.5, -100)
+Frame.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
 
--- Title Label
-local TitleLabel = Instance.new("TextLabel")
-TitleLabel.Parent = Frame
-TitleLabel.Size = UDim2.new(1, 0, 0, 20)
-TitleLabel.Text = "Helius Hub [ Beta ]"
-TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-TitleLabel.TextScaled = true
-TitleLabel.Font = Enum.Font.GothamBold
-TitleLabel.BackgroundTransparency = 1  -- No background for text labels
+TextBox.Parent = Frame
+TextBox.Size = UDim2.new(0, 100, 0, 50)
+TextBox.Position = UDim2.new(0.5, -50, 0, 10)
+TextBox.Text = tostring(playerSpeed)
+TextBox.BackgroundColor3 = Color3.new(1, 1, 1)
 
--- Close Label
-local CloseLabel = Instance.new("TextLabel")
-CloseLabel.Parent = Frame
-CloseLabel.Size = UDim2.new(0, 50, 0, 50) -- Adjusted size to not span the whole frame
-CloseLabel.Position = UDim2.new(1, -50, 0, 0) -- Positioned at the top-right corner
-CloseLabel.Text = "X"
-CloseLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-CloseLabel.TextScaled = true
-CloseLabel.Font = Enum.Font.Gotham
-CloseLabel.BackgroundTransparency = 1  -- No background for text labels
+Slider.Parent = Frame
+Slider.Size = UDim2.new(0, 200, 0, 20)
+Slider.Position = UDim2.new(0.5, -100, 0, 100)
+Slider.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
 
--- Function to close the GUI
-CloseLabel.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        ScreenGui.Enabled = false
+SliderButton.Parent = Slider
+SliderButton.Size = UDim2.new(0, 20, 0, 20)
+SliderButton.Position = UDim2.new(0, 0, 0, 0)
+SliderButton.BackgroundColor3 = Color3.new(0.8, 0.8, 0)
+
+ValueLabel.Parent = Frame
+ValueLabel.Size = UDim2.new(0, 100, 0, 50)
+ValueLabel.Position = UDim2.new(0.5, -50, 0, 60)
+ValueLabel.BackgroundColor3 = Color3.new(0, 0, 0)
+ValueLabel.Text = "Speed: " .. tostring(playerSpeed)
+
+-- Functions
+local function updatePlayerSpeed(value)
+    player.Character:WaitForChild("Humanoid").WalkSpeed = value
+    ValueLabel.Text = "Speed: " .. tostring(value)
+end
+
+TextBox.FocusLost:Connect(function(enter)
+    if enter then
+        local value = tonumber(TextBox.Text) or playerSpeed
+        updatePlayerSpeed(value)
+        playerSpeed = value
+        SliderButton.Position = UDim2.new(0, (value - 16) * 10, 0, 0)
     end
 end)
 
--- Description Label
-local DescriptionLabel = Instance.new("TextLabel")
-DescriptionLabel.Parent = Frame
-DescriptionLabel.Size = UDim2.new(1, 0, 0, 50)
-DescriptionLabel.Position = UDim2.new(0, 0, 0, 50)
-DescriptionLabel.Text = "Adjust your walk speed below:"
-DescriptionLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-DescriptionLabel.TextScaled = true
-DescriptionLabel.Font = Enum.Font.Gotham
-DescriptionLabel.BackgroundTransparency = 1  -- No background for text labels
-
--- Speed Label
-local SpeedLabel = Instance.new("TextLabel")
-SpeedLabel.Parent = Frame
-SpeedLabel.Size = UDim2.new(1, 0, 0, 25)
-SpeedLabel.Position = UDim2.new(0, 0, 0, 80)
-SpeedLabel.Text = "Walk Speed: 16"
-SpeedLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-SpeedLabel.TextScaled = true
-SpeedLabel.Font = Enum.Font.Gotham
-SpeedLabel.BackgroundTransparency = 1  -- No background for text labels
-
--- Speed Input (TextBox)
-local SpeedInput = Instance.new("TextBox")
-SpeedInput.Parent = Frame
-SpeedInput.Size = UDim2.new(1, 0, 0, 15)
-SpeedInput.Position = UDim2.new(0, 0, 0, 110)
-SpeedInput.Text = "16"
-SpeedInput.TextColor3 = Color3.fromRGB(255, 255, 255)
-SpeedInput.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-SpeedInput.Font = Enum.Font.Gotham
-SpeedInput.TextScaled = true
-
--- Modify Speed Button
-local ModifySpeedButton = Instance.new("TextButton")
-ModifySpeedButton.Parent = Frame
-ModifySpeedButton.Size = UDim2.new(1, 0, 0, 50)
-ModifySpeedButton.Position = UDim2.new(0, 0, 0, 150)
-ModifySpeedButton.Text = "Modify Speed"
-ModifySpeedButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-ModifySpeedButton.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
-ModifySpeedButton.Font = Enum.Font.GothamBold
-ModifySpeedButton.TextScaled = true
-
--- Function to modify speed
-local function modifySpeed()
-    local newSpeed = tonumber(SpeedInput.Text) or 16
-    if player.Character and player.Character:FindFirstChild("Humanoid") then
-        player.Character.Humanoid.WalkSpeed = newSpeed
-        SpeedLabel.Text = "Walk Speed: " .. newSpeed
+SliderButton.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        local connection
+        connection = game:GetService("UserInputService").InputChanged:Connect(function(moveInput)
+            if moveInput.UserInputType == Enum.UserInputType.MouseMovement then
+                local sliderPos = moveInput.Position.X - Slider.AbsolutePosition.X
+                local value = math.clamp(sliderPos / 10 + 16, 16, 200)
+                updatePlayerSpeed(value)
+                playerSpeed = value
+                SliderButton.Position = UDim2.new(0, sliderPos, 0, 0)
+            end
+        end)
+        input.Changed:Wait()
+        connection:Disconnect()
     end
-end
-
--- Connect events
-ModifySpeedButton.MouseButton1Click:Connect(modifySpeed)
+end)
