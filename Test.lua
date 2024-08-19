@@ -55,8 +55,7 @@ end)
 
 SliderButton.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 then
-        local connection
-        connection = game:GetService("UserInputService").InputChanged:Connect(function(moveInput)
+        local connection = game:GetService("UserInputService").InputChanged:Connect(function(moveInput)
             if moveInput.UserInputType == Enum.UserInputType.MouseMovement then
                 local sliderPos = moveInput.Position.X - Slider.AbsolutePosition.X
                 local value = math.clamp(sliderPos / 10 + 16, 16, 200)
